@@ -1,0 +1,52 @@
+﻿@model TOTVS_Challenge.Models.Tasks
+
+@{
+    ViewData["Title"] = "Task";
+}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h4>Tasks</h4>
+        <form asp-action="CreateOrEdit" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TaskId"/>
+            <input type="hidden" asp-for="status"/>
+            <input type="hidden" asp-for="CreationDate" />
+            <input type="hidden" asp-for="ConclusionDate" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="responsibleUserId" class="control-label"></label>
+                <input asp-for="responsibleUserId" class="form-control" />
+                <span asp-validation-for="responsibleUserId" class="text-danger"></span>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary w-100" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <a asp-action="Index" class="btn btn-secondary  w-100">View All</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

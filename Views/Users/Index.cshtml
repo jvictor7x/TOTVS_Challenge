@@ -1,0 +1,66 @@
+﻿@model IEnumerable<TOTVS_Challenge.Models.Users>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h1>Users</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AssignedTasks)
+                    </th>
+                    <th>
+                        <a asp-action="CreateOrEdit" class="btn btn-sm btn-success">
+                            <i class="fa-solid fa-plus"></i> New
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AssignedTasks)
+                    </td>
+                        <td>
+                            <form asp-action="Delete" asp-route-id="@item.UserId">
+                                <div class="btn-group btn-group-sm">
+                                    <a asp-action="CreateOrEdit" asp-route-id="@item.UserId" class="btn btn-warning">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('Are you sure to delete this record?')">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+       </div>
+
+</div>

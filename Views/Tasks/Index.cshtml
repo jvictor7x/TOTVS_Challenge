@@ -1,0 +1,90 @@
+﻿@model IEnumerable<TOTVS_Challenge.Models.Tasks>
+
+@{
+    ViewData["Title"] = "Tasks";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h1>Tasks</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TaskId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreationDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ConclusionDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.responsibleUserId)
+                    </th>
+                    <th>
+                        <a asp-action="CreateOrEdit" class="btn btn-sm btn-success">
+                            <i class="fa-solid fa-plus"></i> New
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConclusionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.responsibleUserId)
+                </td>
+                <td>
+                    <div class="btn-group btn-group-sm">
+                        <form asp-action="Delete" asp-route-id="@item.TaskId">                  
+                            <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Are you sure to delete this record?')">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </form>
+                        <a asp-action="CreateOrEdit" asp-route-id="@item.TaskId" class="btn btn-warning">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <form asp-action="MakeTaskDoneOrUndone" asp-route-id="@item.TaskId">
+                            <button type="submit" class="btn btn-info"
+                                    onclick="return confirm('Are you sure you want to change if the task is finished or not?')">
+                                <i class="fa-solid fa-rotate-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+            </tbody>
+        </table>
+       </div>
+
+</div>
